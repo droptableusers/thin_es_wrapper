@@ -1,0 +1,43 @@
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'jacoco'
+apply plugin: 'sonar-runner'
+
+version = '1.0'
+sourceCompatibility = 1.8
+mainClassName = "es_wrapper.Main"
+ext.dropwizardVersion = '0.8.2'
+ext.elasticsearchVersion = '1.7.2'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+  repositories { jcenter() }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+  }
+}
+
+shadowJar {
+  mergeServiceFiles()
+}
+
+dependencies {
+  compile 'org.projectlombok:lombok:1.16.6'
+  compile 'io.dropwizard:dropwizard-core:' + dropwizardVersion 
+  compile 'org.slf4j:slf4j-api:1.7.5'
+  compile 'org.elasticsearch:elasticsearch:' + elasticsearchVersion
+  compile ('io.dropwizard.modules:dropwizard-elasticsearch:0.8.0-1') {
+    exclude group: 'org.elasticsearch'
+  } // force elasticsearch version
+  
+  testCompile 'io.dropwizard:dropwizard-testing:' + dropwizardVersion
+  testCompile 'io.dropwizard:dropwizard-client:' + dropwizardVersion
+  testCompile 'junit:junit:4.+'
+}
+
