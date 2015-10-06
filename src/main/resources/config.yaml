@@ -1,0 +1,15 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 9976
+  adminConnectors:
+    - type: http
+      port: 9977
+      
+elasticsearch:
+  clusterName: elasticsearch
+  settings:
+    node.name: RestReader
+    
+index: demo
+type: logs

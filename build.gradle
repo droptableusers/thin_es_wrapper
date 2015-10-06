@@ -8,7 +8,7 @@ apply plugin: 'sonar-runner'
 
 version = '1.0'
 sourceCompatibility = 1.8
-mainClassName = "es_wrapper.Main"
+mainClassName = "thin_es_wrapper.Main"
 ext.dropwizardVersion = '0.8.2'
 ext.elasticsearchVersion = '1.7.2'
 
